@@ -12,7 +12,7 @@ pipeline {
     }
     stage('Build & Test') {
       steps {
-        bat 'mvn -B clean package'
+        bat 'mvn -B clean verify'
       }
     }
     // // Subir artifact a Github Packages
@@ -45,6 +45,10 @@ pipeline {
   post {
     always {
       junit '**/target/surefire-reports/*.xml'
+      // Publicar cobertura de JaCoCo
+      jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java'
+      // Archivar reporte HTML de JaCoCo
+      archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: false, allowEmptyArchive: true
       archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
     }
     // Si el pipeline termina exitosamente
