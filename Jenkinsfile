@@ -21,7 +21,7 @@ pipeline {
         bat 'mvn -B -Pgithub "-Dgpr.owner=chapaxD" "-Dgpr.repo=spring-docker" -DskipTests deploy'
       }
     }
-    Buildar imagen Docker
+    //Buildar imagen Docker
     stage('Build Docker Image') {
       steps {
         bat 'docker build -t %IMAGE_NAME% .'
