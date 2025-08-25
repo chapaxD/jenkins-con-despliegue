@@ -45,9 +45,7 @@ pipeline {
   post {
     always {
       junit '**/target/surefire-reports/*.xml'
-      // Publicar cobertura de JaCoCo
-      jacoco execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java'
-      // Archivar reporte HTML de JaCoCo
+      // Archivar reporte HTML/XML de JaCoCo
       archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: false, allowEmptyArchive: true
       archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
     }
